@@ -428,7 +428,7 @@
 
             var data1 = [];
             var test1 = {};
-            // $.ajax('http://v.juhe.cn/xhzd/bushou',{
+            // $.ajax('https://v.juhe.cn/xhzd/bushou',{
             //     type:'get',
             //     data:{
             //         key:'beb8de4a1656916c4f69d79d1b641b4e'
@@ -477,7 +477,7 @@
 
             var data2 = [];
             var test2 = {};
-            // $.ajax('http://v.juhe.cn/xhzd/pinyin',{
+            // $.ajax('https://v.juhe.cn/xhzd/pinyin',{
             //     type:'get',
             //     data:{
             //         key:'beb8de4a1656916c4f69d79d1b641b4e'
@@ -526,7 +526,7 @@
             var data3 = [];
             var test3 = {};
             function bushou_zi(word){
-                $.ajax('http://v.juhe.cn/xhzd/querybs',{
+                $.ajax('https://v.juhe.cn/xhzd/querybs',{
                     type:'get',
                     data:{
                         word: word,
@@ -562,7 +562,7 @@
                 // console.log(word);
                 history.push(word);
                 $.ajax({
-                    url: 'http://v.juhe.cn/xhzd/query',
+                    url: 'https://v.juhe.cn/xhzd/query',
                     type: 'get',
                     dataType: 'jsonp',
                     data: {
@@ -613,7 +613,7 @@
 
 
             function pinyin_py(word){
-                $.ajax('http://v.juhe.cn/xhzd/querypy',{
+                $.ajax('https://v.juhe.cn/xhzd/querypy',{
                     type:'get',
                     data:{
                         word: word,
@@ -651,7 +651,7 @@
             function search(){
                 var zi = $('#search').val();
                 if (zi) {
-                    $.ajax('http://v.juhe.cn/xhzd/query',{
+                    $.ajax('https://v.juhe.cn/xhzd/query',{
                         type:'get',
                         data:{
                             word: zi,

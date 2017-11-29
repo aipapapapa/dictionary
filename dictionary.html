@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no'>
+    <title>新华字典</title>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+            outline:0;
+        }
+        #header{
+            width:100%;
+            height:50px;
+            background:#ff0033;
+            position:absolute;
+            top:0;
+        }
+        #h1,#h3{
+            height:50px;
+            line-height: 50px;
+            width:80px;
+            color:#f5f5f5;
+            text-align:center;
+        }
+        #h1{float:left;}
+        #h3{float:right;}
+        #h2{
+            height:50px;
+            line-height: 50px;
+            color:#f5f5f5;
+            text-align:center;
+            font-size:25px;
+        }
+        #h1 a{
+            text-decoration: none;
+            color:#f5f5f5;
+        }
+
+        #content{
+            width:100%;
+            top:50px;
+            bottom:50px;
+            position:absolute;
+            overflow:scroll;
+        }
+        #content #input{
+            width:100%;
+            height:50px;
+        }
+        #content #input form{
+            border:1px solid #ccc;
+            margin:10px 15px;
+            display:flex;
+        }
+        #content #input #search{
+            color:#a9a9a9;
+            width:100%;
+            border:0;
+            height:26px;
+            padding:2px 0 2px 5px;
+        }
+        #content #input #btn{
+            color:#696969;
+            background:#ccc;
+            border:0;
+            width:80px;
+            height:30px;
+            float:right;
+            line-height: 30px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        #content #content_text{
+            text-align: center;
+        }
+        #content #content_text img{
+            padding:0 auto;
+        }
+        #content #content_text p{
+            color:#ffa500;
+        }
+
+        .hide{
+            display:none;
+        }
+        .neirong{
+            list-style:none;
+            width:78px;
+            height:78px;
+            float:left;
+            background:url(images/gezi.png);
+            font-size:35px;
+            line-height:78px;
+            font-weight:normal;
+            text-align:center;
+        }
+        .neirong2{
+            list-style:none;
+            width:90px;
+            height:45px;
+            float:left;
+            border:1px solid #a1a1a1;
+            border-radius:12px;
+            line-height:45px;
+            font-weight:normal;
+            text-align:center;
+            margin:3px 3px;
+        }
+        .bihuashu{
+            width:85%;
+            float:left;
+            list-style:none;
+            font-size:25px;
+            font-weight:bold;
+            margin:10px auto 30px 10px;
+        }
+        #dingwei1{
+            position: fixed;
+            right:0;
+            list-style:none;
+            margin-top:0px;
+            float:right;
+            width:30px;
+
+        }
+        #dingwei1 li{
+            float:left;
+            width:30px;
+            margin:7px auto;
+            text-align:center;
+            color: #000000;
+        }
+        #dingwei1 li a{
+            text-decoration:none;
+            color: #000;
+        }
+        #dingwei2{
+            position: fixed;
+            right:0;
+            list-style:none;
+            margin-top:-5px;
+            float:right;
+            width:30px;
+
+        }
+        #dingwei2 li{
+            float:left;
+            width:30px;
+            margin:0 auto 2px;
+            text-align:center;
+            color: #000;
+        }
+        #dingwei2 li a{
+            text-decoration:none;
+            color: #000;
+        }
+
+        .bushou_zi{
+            list-style:none;
+        }
+        .liebiao1{
+            width:96%;
+            height:85px;
+            line-height:85px;
+            margin:0 auto;
+            font-size:20px;
+            border-bottom: 1px solid #a9a9a9;
+        }
+        .neirong3{
+            list-style:none;
+            width:78px;
+            height:78px;
+            float:left;
+            background:url(images/gezi.png);
+            font-size:35px;
+            line-height:78px;
+            font-weight:normal;
+            text-align:center;
+            margin-top:4px;
+        }
+        ._pinyin{
+            width:120px;
+            height:84px;
+            float:left;
+            text-align: center;
+        }
+        ._pianpang{
+
+        }
+        ._bihua{
+            width:120px;
+            height:84px;
+            float:left;
+            text-align: center;
+        }
+        
+        ._li1{
+            width:96%;
+            height:85px;
+            background:#fff5e5;
+            margin:3px auto;
+        }
+        ._li2{
+            width:96%;
+            margin:5px auto;
+        }
+        ._li3{
+            width:96%;
+            margin:15px auto;
+        }
+
+        .neirong4{
+            list-style:none;
+            width:78px;
+            height:78px;
+            float:left;
+            background:url(images/gezi.png);
+            font-size:35px;
+            line-height:78px;
+            font-weight:normal;
+            text-align:center;
+            margin-top:4px;
+        }
+        ._pinyin1{
+            width:38%;
+            height:42px;
+            line-height: 42px;
+            float:left;
+            text-align: center;
+        }
+        ._pianpang{
+            width:38%;
+            height:42px;
+            line-height: 42px;
+            float:left;
+            text-align: center;
+        }
+        ._bihua1{
+            width:38%;
+            height:42px;
+            line-height: 42px;
+            float:left;
+            text-align: center;
+        }
+        ._wubi{
+            width:38%;
+            height:42px;
+            line-height: 42px;
+            float:left;
+            text-align: center;
+        }
+        ._p{
+            color:#cc6600;
+            font-size:20px;
+            font-weight:bold;
+        }
+
+
+        #footer{
+            width:100%;
+            height:50px;
+            background:#ff0033;
+            position:absolute;
+            bottom:0;
+        }
+        #footer div{
+            width:25%;
+            height:50px;
+            float:left;
+        }
+        #footer div p{
+            line-height: 50px;
+            text-align: center;
+            color:#f5f5f5;
+        }
+        #footer .f{
+            background:#dc143c;        
+        }
+    </style>
+    <script type="text/javascript" src="js/bushouList.js"></script>
+    <script type="text/javascript" src="js/pinyinList.js"></script>
+    <script type="text/javascript" src="js/details.js"></script>
+</head>
+<body>
+    <div id="header">
+        <div id="h1"></div>
+        <div id="h3"></div>
+        <div id="h2">新华字典</div>
+    </div>
+
+    
+    <ul id="content">
+        <li  class="qiehuan">
+            <div id="input">
+                <form>
+                    <input type="text" id="search" placeholder="输入汉字进行检索"/>
+                    <div id="btn">检索</div>
+                </form>
+            </div>
+            <div id="content_text">
+                <img src="images/record.png" alt="" />
+                <p>暂无历史记录，赶紧开始搜索学习吧</p>
+            </div>
+        </li>
+
+        <li class="hide qiehuan" id="bushou">
+            <ul id="dingwei1">
+                <li><a href="#bh1">1</a></li>
+                <li><a href="#bh2">2</a></li>
+                <li><a href="#bh3">3</a></li>
+                <li><a href="#bh4">4</a></li>
+                <li><a href="#bh5">5</a></li>
+                <li><a href="#bh6">6</a></li>
+                <li><a href="#bh7">7</a></li>
+                <li><a href="#bh8">8</a></li>
+                <li><a href="#bh9">9</a></li>
+                <li><a href="#bh10">10</a></li>
+                <li><a href="#bh11">11</a></li>
+                <li><a href="#bh12">12</a></li>
+                <li><a href="#bh13">13</a></li>
+                <li><a href="#bh14">14</a></li>
+                <li><a href="#bh15">15</a></li>
+            </ul>
+        </li>
+        <li class="hide qiehuan" id="pinyin">
+            <ul id="dingwei2">
+                <li><a href="#_A">A</a></li>
+                <li><a href="#_B">B</a></li>
+                <li><a href="#_C">C</a></li>
+                <li><a href="#_D">D</a></li>
+                <li><a href="#_E">E</a></li>
+                <li><a href="#_F">F</a></li>
+                <li><a href="#_G">G</a></li>
+                <li><a href="#_H">H</a></li>
+                <li><a href="#_J">J</a></li>
+                <li><a href="#_K">K</a></li>
+                <li><a href="#_L">L</a></li>
+                <li><a href="#_M">M</a></li>
+                <li><a href="#_N">N</a></li>
+                <li><a href="#_O">O</a></li>
+                <li><a href="#_P">P</a></li>
+                <li><a href="#_Q">Q</a></li>
+                <li><a href="#_R">R</a></li>
+                <li><a href="#_S">S</a></li>
+                <li><a href="#_T">T</a></li>
+                <li><a href="#_W">W</a></li>
+                <li><a href="#_X">X</a></li>
+                <li><a href="#_Y">Y</a></li>
+                <li><a href="#_Z">Z</a></li>
+            </ul>
+        </li>
+        <li class="hide qiehuan">
+
+        </li>
+
+    </ul>
+
+    <div id="footer">
+        <div class="f">
+            <p>汉字检索</p>
+        </div>
+        <div>
+            <p>偏旁检索</p>
+        </div>
+        <div>
+            <p>拼音检索</p>
+        </div>
+        <div>
+            <p>历史记录</p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        window.onload = function(){
+            var oFooter = document.getElementById("footer");
+            var oF_divs = oFooter.getElementsByTagName("div");
+            var oContent = document.getElementById("content");
+            var oC_lis = $('.qiehuan');
+            var history = [];
+            // console.log(oC_lis);
+            for(var i = 0;i < oF_divs.length;i ++){
+                oF_divs[i].index = i;
+                if(i == 3){
+                    oF_divs[i].onclick=function(){
+                        $('.bushou_zi').hide();
+                    for(var n = 0;n < oF_divs.length;n ++){
+                        oF_divs[n].className = "";
+                        oC_lis[n].className = "hide";
+                    }
+                    this.className = "f";
+                    oC_lis[this.index].className = "";
+                    if(history.length > 0){
+                        $('#content_text').hide();
+                        $ul = $('<ul>');
+                        history.forEach(function(jj){
+                            var $li = $('<li>');
+                            $('<div>').addClass('neirong3').html(jj.zi).appendTo($li);
+                            $('<div>').addClass('_pinyin').html(jj.pinyin).appendTo($li);
+                            $('<div>').addClass('_bihua').html("笔画数："+jj.bihua).appendTo($li);
+                            // $('<div>').addClass('jiantou').appendTo($li);
+                            $li.addClass('liebiao1');
+                            $li.click(function() {
+                                dl(jj);
+                            });
+                            $li.appendTo($ul);
+                        })
+                        $ul.appendTo('#content');
+                        $ul.addClass('bushou_zi');
+                    }
+                }
+                }else {
+                    oF_divs[i].onclick = function(){
+                    $('.bushou_zi').hide();
+                    for(var n = 0;n < oF_divs.length;n ++){
+                        oF_divs[n].className = "";
+                        oC_lis[n].className = "hide";
+                    }
+                    this.className = "f";
+                    oC_lis[this.index].className = "";
+                }
+                }
+            }
+
+
+
+            var data1 = [];
+            var test1 = {};
+            // $.ajax('http://v.juhe.cn/xhzd/bushou',{
+            //     type:'get',
+            //     data:{
+            //         key:'beb8de4a1656916c4f69d79d1b641b4e'
+            //     },
+            //     dataType:'jsonp',
+                // success:function(data){
+                //     data1 = data.result;
+                    // console.log(data1[data1.length-1]);
+                    
+                    var bushouList = getBuShouList();
+                    data1 = bushouList.result;
+                    pianpang(data1);
+            //     }
+            // });
+            function pianpang(data1){
+                // console.log(data1);
+                var max = parseInt(data1[data1.length-1].bihua);
+                for( var i = 0;i < max;i ++){
+                    var all = [];
+                    data1.forEach(function(item) {
+                        if(parseInt(item.bihua) == i+1){
+                            all.push(item)
+                        }
+                    })
+                    test1[i] = all;
+                }
+                for(var key in test1){
+                    // console.log(test1[key]);
+                    var keys = parseInt(key);
+                    var $ul = $('<ul>');
+                    $ul.html('笔画数' +(keys+1));
+                    $ul.attr("id","bh"+(keys+1));
+                    test1[key].forEach(function(jj){
+                        var $li = $('<li>');
+                        $('<div>').addClass('neirong').html(jj.bushou).appendTo($li);
+                        $li.click(function() {
+                            bushou_zi(jj.bushou);
+                        });
+                        $li.appendTo($ul);
+                    })
+                    $ul.appendTo('#bushou');
+                    $ul.addClass('bihuashu');
+                }
+            }
+
+
+            var data2 = [];
+            var test2 = {};
+            // $.ajax('http://v.juhe.cn/xhzd/pinyin',{
+            //     type:'get',
+            //     data:{
+            //         key:'beb8de4a1656916c4f69d79d1b641b4e'
+            //     },
+            //     dataType:'jsonp',
+            //     success:function(data){
+            //         data2 = data.result;
+                    // console.log(data2[data2.length-1]);
+                    var pinyinList = getPinyinList();
+                    data2 = pinyinList.result;
+                    pinyin(data2)
+            //     }
+            // });
+            function pinyin(data2){
+                // console.log(data2);
+                for(var i = 0;i < 26;i ++){
+                    var all = [];
+                    data2.forEach(function(item){
+                        if(String.fromCharCode(65 + i) == item.pinyin_key){
+                            all.push(item);
+                        }
+                    })
+                    test2[i] = all;
+                }
+                // console.log(test2);
+                for(var key in test2){
+                    // console.log(test2[key]);
+                    var $ul = $('<ul>');
+                    // console.log(String.fromCharCode(parseInt(key)+65));
+                    $ul.html(String.fromCharCode(parseInt(key)+65));
+                    $ul.attr('id','_'+String.fromCharCode(parseInt(key)+65));
+                    test2[key].forEach(function(jj){
+                        var $li = $('<li>');
+                        $('<div>').addClass('neirong2').html(jj.pinyin).appendTo($li);
+                        $li.click(function() {
+                            pinyin_py(jj.pinyin);
+                        });
+                        $li.appendTo($ul);
+                    })
+                    $ul.appendTo('#pinyin');
+                    $ul.addClass('bihuashu');
+                }
+            }
+
+
+            var data3 = [];
+            var test3 = {};
+            function bushou_zi(word){
+                $.ajax('http://v.juhe.cn/xhzd/querybs',{
+                    type:'get',
+                    data:{
+                        word: word,
+                        key:'bd3780c944d89d3a2bd64a6f44d2bcfc'
+                    },
+                    dataType:'jsonp',
+                    success:function(data){
+                        data3 = data.result.list;
+                        // var details = getDetail();
+                        // data3 = details.sidedetail;
+                        // console.log(data3)
+                        $('#bushou').addClass("hide");
+                        var $ul = $('<ul>');
+                        data3.forEach(function(jj){
+                            var $li = $('<li>');
+                            $('<div>').addClass('neirong3').html(jj.zi).appendTo($li);
+                            $('<div>').addClass('_pinyin').html(jj.pinyin).appendTo($li);
+                            $('<div>').addClass('_bihua').html("笔画数："+jj.bihua).appendTo($li);
+                            // $('<div>').addClass('jiantou').appendTo($li);
+                            $li.addClass('liebiao1');
+                            $li.click(function() {
+                                dl(jj);
+                            });
+                            $li.appendTo($ul);
+                        })
+                        $ul.appendTo('#content');
+                        $ul.addClass('bushou_zi');
+                    }
+                });
+            }
+            
+            function dl(word){
+                // console.log(word);
+                history.push(word);
+                $.ajax({
+                    url: 'http://v.juhe.cn/xhzd/query',
+                    type: 'get',
+                    dataType: 'jsonp',
+                    data: {
+                        word:word.zi,
+                        key:'bd3780c944d89d3a2bd64a6f44d2bcfc'
+                    },
+                    success: function(data){
+                        // console.log(initZi)
+                        // initZi (data)
+                        var data4 = data.result;
+                        // console.log(data4);
+                        $('.bushou_zi').addClass('hide');
+                        var $ul = $('<ul>');
+                        var li1 = $('<li>');
+                        var li2 = $('<li>');
+                        var li3 = $('<li>');
+                        // data4.each(function(jj){
+                            $('<div>').addClass('neirong4').html(data4.zi).appendTo(li1);
+                            // $('<p>').html(data4.zi).appendTo($ul);
+                            $('<div>').addClass('_pinyin1').html("拼音："+data4.pinyin).appendTo(li1);
+                            $('<div>').addClass('_pianpang').html("偏旁："+data4.bushou).appendTo(li1);
+                            $('<div>').addClass('_bihua1').html("笔画数："+data4.bihua).appendTo(li1);
+                            $('<div>').addClass('_wubi').html("五笔："+data4.wubi).appendTo(li1);
+                            li1.addClass('_li1');
+                            var div1 = $('<div>');
+                            $('<p>').addClass('_p').html("基本解释：").appendTo(div1);
+                            $('<hr>').appendTo(div1);
+                            data4.jijie.forEach(function(jb){
+                                    $('<p>').html(jb).appendTo(div1);
+                            })
+                            var div2 = $('<div>');
+                            $('<p>').addClass('_p').html("详细解释：").appendTo(div2);
+                            $('<hr>').appendTo(div2);
+                            data4.xiangjie.forEach(function(jp){
+                                $('<p>').html(jp).appendTo(div2);
+                            })
+                            div1.appendTo(li2);
+                            div2.appendTo(li3);
+                            li1.appendTo($ul);
+                            li2.addClass('_li2').appendTo($ul);
+                            li3.addClass('_li3').appendTo($ul);
+                        // })
+                        $ul.appendTo('#content');
+                        $ul.addClass('bushou_zi');
+                    }
+                })
+            }
+
+
+            function pinyin_py(word){
+                $.ajax('http://v.juhe.cn/xhzd/querypy',{
+                    type:'get',
+                    data:{
+                        word: word,
+                        key:'bd3780c944d89d3a2bd64a6f44d2bcfc'
+                    },
+                    dataType:'jsonp',
+                    success:function(data){
+                        var data4 = data.result.list;
+                        // var details = getDetail();
+                        // data3 = details.sidedetail;
+                        console.log(data4)
+                        $('#pinyin').addClass("hide");
+                        var $ul = $('<ul>');
+                        data4.forEach(function(jj){
+                            var $li = $('<li>');
+                            $('<div>').addClass('neirong3').html(jj.zi).appendTo($li);
+                            $('<div>').addClass('_pinyin').html(jj.pinyin).appendTo($li);
+                            $('<div>').addClass('_bihua').html("笔画数："+jj.bihua).appendTo($li);
+                            // $('<div>').addClass('jiantou').appendTo($li);
+                            $li.addClass('liebiao1');
+                            $li.click(function() {
+                                dl(jj);
+                            });
+                            $li.appendTo($ul);
+                        })
+                        $ul.appendTo('#content');
+                        $ul.addClass('bushou_zi');
+                        // pinyin(data3)
+                    }
+                });
+            }
+
+
+            $('#btn').click(search);
+            function search(){
+                var zi = $('#search').val();
+                if (zi) {
+                    $.ajax('http://v.juhe.cn/xhzd/query',{
+                        type:'get',
+                        data:{
+                            word: zi,
+                            key:'bd3780c944d89d3a2bd64a6f44d2bcfc'
+                        },
+                        dataType:'jsonp',
+                        success:function(data){
+                            var data4 = data.result;
+                            history.push(data4);
+                            $('#content_text').hide();
+                            var $ul = $('<ul>');
+                            var li1 = $('<li>');
+                            var li2 = $('<li>');
+                            var li3 = $('<li>');
+                            // data4.each(function(jj){
+                                $('<div>').addClass('neirong4').html(data4.zi).appendTo(li1);
+                                // $('<p>').html(data4.zi).appendTo($ul);
+                                $('<div>').addClass('_pinyin1').html("拼音："+data4.pinyin).appendTo(li1);
+                                $('<div>').addClass('_pianpang').html("偏旁："+data4.bushou).appendTo(li1);
+                                $('<div>').addClass('_bihua1').html("笔画数："+data4.bihua).appendTo(li1);
+                                $('<div>').addClass('_wubi').html("五笔："+data4.wubi).appendTo(li1);
+                                li1.addClass('_li1');
+                                var div1 = $('<div>');
+                                $('<p>').addClass('_p').html("基本解释：").appendTo(div1);
+                                $('<hr>').appendTo(div1);
+                                data4.jijie.forEach(function(jb){
+                                     $('<p>').html(jb).appendTo(div1);
+                                })
+                                var div2 = $('<div>');
+                                $('<p>').addClass('_p').html("详细解释：").appendTo(div2);
+                                $('<hr>').appendTo(div2);
+                                data4.xiangjie.forEach(function(jp){
+                                    $('<p>').html(jp).appendTo(div2);
+                                })
+                                div1.appendTo(li2);
+                                div2.appendTo(li3);
+                                li1.appendTo($ul);
+                                li2.addClass('_li2').appendTo($ul);
+                                li3.addClass('_li3').appendTo($ul);
+                            // })
+                            $ul.appendTo('#content');
+                            $ul.addClass('bushou_zi');
+                        }
+                    })
+                }
+            }
+        }
+
+
+    </script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+</body>
+
+</html>

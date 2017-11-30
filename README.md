@@ -1,2 +1,2 @@
 # dictionary
-#https://aipapapapa.github.io/dictionary/dictionary.html
+#https://aipapapapa.github.io/dictionary/#
